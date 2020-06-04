@@ -1,0 +1,12 @@
+{
+  "comments": "template",
+  "host_user": "ubuntu",
+  "host_user_dir": "/home/ubuntu",
+  "docker_user_dir": "/home/cluster",
+  "docker_user": "cluster",
+  "docker_ssh_port": 2022,
+  "docker_ssh_key": "./DockerEnv/ssh-keys/id_rsa",
+  "script_path": "~/distributed-training/test_scripts/single_node/pytorch/resnet101_imagenet.py",
+  "script_args": "--epochs 20",
+  "log_folder": "resnet101-imagenet-ST"
+}

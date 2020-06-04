@@ -1,0 +1,4 @@
+    IdentityFile /home/cluster/.ssh/id_rsa
+    StrictHostKeyChecking no
+    UserKnownHostsFile /dev/null
+    Port 2022

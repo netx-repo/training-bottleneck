@@ -1,0 +1,287 @@
+ubuntu@ip-172-31-89-192:~/autorun$ python3 docker_dt.py training-configs/template.json
+========== initializing ssh connections
+IP localhost DONE
+IP 172.31.93.195 DONE
+========== initialization for ssh host node DONE
+initiating host env
+cmd stdout:   cmd stderr:  mkdir: cannot create directory ‘/home/ubuntu/autorun’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/hooks’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/model_log’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/mpi_events’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/net’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/cpu’: File exists
+
+>>>>>>>>>> localhost: git pull <<<<<<<<<<
+cmd stdout:  Already up to date.
+ cmd stderr:
+>>>>>>>>>> DONE localhost: git pull <<<<<<<<<<
+cmd stdout:   cmd stderr:  mkdir: cannot create directory ‘/home/ubuntu/autorun’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/hooks’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/model_log’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/horovod_logs/mpi_events’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/net’: File exists
+mkdir: cannot create directory ‘/home/ubuntu/autorun/logs/cpu’: File exists
+
+>>>>>>>>>> 172.31.93.195: git pull <<<<<<<<<<
+cmd stdout:  Already up to date.
+ cmd stderr:
+>>>>>>>>>> DONE 172.31.93.195: git pull <<<<<<<<<<
+========== working on bandwidth control
+>>>>>>>>>> localhost: delete bandwidth limit <<<<<<<<<<
+cmd stdout:   cmd stderr:  RTNETLINK answers: Invalid argument
+
+>>>>>>>>>> DONE localhost: delete bandwidth limit <<<<<<<<<<
+>>>>>>>>>> localhost: delete bandwidth limit <<<<<<<<<<
+cmd stdout:   cmd stderr:  RTNETLINK answers: Invalid argument
+
+>>>>>>>>>> DONE localhost: delete bandwidth limit <<<<<<<<<<
+>>>>>>>>>> 172.31.93.195: delete bandwidth limit <<<<<<<<<<
+cmd stdout:   cmd stderr:  RTNETLINK answers: Invalid argument
+
+>>>>>>>>>> DONE 172.31.93.195: delete bandwidth limit <<<<<<<<<<
+>>>>>>>>>> 172.31.93.195: delete bandwidth limit <<<<<<<<<<
+cmd stdout:   cmd stderr:  RTNETLINK answers: Invalid argument
+
+>>>>>>>>>> DONE 172.31.93.195: delete bandwidth limit <<<<<<<<<<
+========== bandwidth control DONE
+>>>>>>>>>> launched CPU & Network monitoring
+========== Start containers
+>>>>>>>>>> localhost <<<<<<<<<<
+>>>>>>>>>> localhost: stop all containers <<<<<<<<<<
+cmd stdout:   cmd stderr:  "docker kill" requires at least 1 argument.
+See 'docker kill --help'.
+
+Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+Kill one or more running containers
+
+>>>>>>>>>> DONE localhost: stop all containers <<<<<<<<<<
+>>>>>>>>>> localhost: pull docker image <<<<<<<<<<
+cmd stdout:  1.0: Pulling from zarzen/horovod-mod
+Digest: sha256:70c82ac4ea358e6a72c6db6383949eab05b11eda2b4d557ff10d278cebc0942b
+Status: Image is up to date for zarzen/horovod-mod:1.0
+docker.io/zarzen/horovod-mod:1.0
+ cmd stderr:
+>>>>>>>>>> DONE localhost: pull docker image <<<<<<<<<<
+docker_id 6f82944c521bed92762bbf764eba56d4ab55c0b34c052422dc3756ea672ca699
+
+Start Errors:
+========== localhost start container DONE ==========
+>>>>>>>>>> 172.31.93.195 <<<<<<<<<<
+>>>>>>>>>> 172.31.93.195: stop all containers <<<<<<<<<<
+cmd stdout:   cmd stderr:  "docker kill" requires at least 1 argument.
+See 'docker kill --help'.
+
+Usage:  docker kill [OPTIONS] CONTAINER [CONTAINER...]
+
+Kill one or more running containers
+
+>>>>>>>>>> DONE 172.31.93.195: stop all containers <<<<<<<<<<
+>>>>>>>>>> 172.31.93.195: pull docker image <<<<<<<<<<
+cmd stdout:  1.0: Pulling from zarzen/horovod-mod
+Digest: sha256:70c82ac4ea358e6a72c6db6383949eab05b11eda2b4d557ff10d278cebc0942b
+Status: Image is up to date for zarzen/horovod-mod:1.0
+docker.io/zarzen/horovod-mod:1.0
+ cmd stderr:
+>>>>>>>>>> DONE 172.31.93.195: pull docker image <<<<<<<<<<
+docker_id 6a2a1ee36c94097b2946c47891a13c38deadc1ab386bae7c1de63317a2f02829
+
+Start Errors:
+========== 172.31.93.195 start container DONE ==========
+********** Start working on experiment script
+Exec: NCCL_DEBUG=INFO HOROVOD_NUM_NCCL_STREAMS=4 horovodrun -np 8 -H localhost:4,172.31.93.195:4 python3 /home/cluster/distributed-training/test_scripts/pytorch_resnet101_cifar10.py --epochs 1 |& grep -v "Read -1"
+---------- training log
+Warning: Permanently added '[172.31.93.195]:2022' (RSA) to the list of known hosts.
+[1,4]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,4]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank4.log
+[1,7]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,7]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank7.log
+[1,1]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,1]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank1.log
+[1,5]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,5]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank5.log
+[1,6]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,6]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank6.log
+[1,0]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,0]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank0.log
+[1,2]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,2]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank2.log
+[1,3]<stdout>:create dir: /home/cluster/horovod_logs/mpi_events/, status: 1
+[1,3]<stdout>:logfile/home/cluster/horovod_logs/mpi_events/mpi-20191216-011017-rank3.log
+[1,0]<stdout>:torch num threads: 4
+[1,0]<stdout>:cwd: /home/cluster
+[1,1]<stdout>:torch num threads: 4
+[1,1]<stdout>:cwd: /home/cluster
+[1,0]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-0/cifar-10-python.tar.gz
+[1,1]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-1/cifar-10-python.tar.gz
+[1,2]<stdout>:torch num threads: 4
+[1,2]<stdout>:cwd: /home/cluster
+[1,5]<stdout>:torch num threads: 4
+[1,5]<stdout>:cwd: /home/cluster
+[1,3]<stdout>:torch num threads: 4
+[1,2]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-2/cifar-10-python.tar.gz
+[1,3]<stdout>:cwd: /home/cluster
+[1,6]<stdout>:torch num threads: 4
+[1,4]<stdout>:torch num threads: 4
+[1,4]<stdout>:cwd: /home/cluster
+[1,5]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-5/cifar-10-python.tar.gz
+[1,6]<stdout>:cwd: /home/cluster
+[1,7]<stdout>:torch num threads: 4
+[1,7]<stdout>:cwd: /home/cluster
+[1,3]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-3/cifar-10-python.tar.gz
+[1,4]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-4/cifar-10-python.tar.gz
+[1,6]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-6/cifar-10-python.tar.gz
+[1,7]<stdout>:Downloading https://www.cs.toronto.edu/~kriz/cifar-10-python.tar.gz to ./data-7/cifar-10-python.tar.gz
+ 97%|#########6| 165347328/170498071 [00:11<00:00, 13755573.88it/s][1,7]<stdout>:Extracting ./data-7/cifar-10-python.tar.gz to ./data-7
+ 80%|#######9  | 136192000/170498071 [00:12<00:02, 14162038.88it/s][1,6]<stdout>:Extracting ./data-6/cifar-10-python.tar.gz to ./data-6
+ 81%|########  | 138043392/170498071 [00:12<00:02, 15223512.99it/s][1,3]<stdout>:Extracting ./data-3/cifar-10-python.tar.gz to ./data-3
+100%|#########9| 169910272/170498071 [00:12<00:00, 15922163.56it/s][1,4]<stdout>:Extracting ./data-4/cifar-10-python.tar.gz to ./data-4
+ 91%|######### | 154427392/170498071 [00:12<00:00, 16641893.91it/s][1,5]<stdout>:Extracting ./data-5/cifar-10-python.tar.gz to ./data-5
+ 99%|#########9| 169205760/170498071 [00:12<00:00, 23737614.92it/s][1,0]<stdout>:Extracting ./data-0/cifar-10-python.tar.gz to ./data-0
+ 88%|########7 | 149397504/170498071 [00:12<00:00, 24055549.95it/s][1,2]<stdout>:Extracting ./data-2/cifar-10-python.tar.gz to ./data-2
+ 98%|#########8| 167772160/170498071 [00:12<00:00, 38000089.26it/s][1,1]<stdout>:Extracting ./data-1/cifar-10-python.tar.gz to ./data-1
+[1,6]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011034-rank6.log
+[1,7]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011034-rank7.log
+[1,4]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011034-rank4.log
+[1,5]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011034-rank5.log
+[1,3]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011035-rank3.log
+[1,0]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011035-rank0.log
+[1,2]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011035-rank2.log
+[1,1]<stdout>:/home/cluster/horovod_logs/hooks/hook-20191216-011035-rank1.log
+[1,0]<stderr>:                                            [1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Bootstrap : Using [0]ens3:172.31.89.192<0>t/s]
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/IB : No device found.
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Socket : Using [0]ens3:172.31.89.192<0>
+[1,0]<stdout>:NCCL version 2.4.8+cuda10.0
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Bootstrap : Using [0]ens3:172.31.89.192<0>
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Bootstrap : Using [0]ens3:172.31.89.192<0>
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Bootstrap : Using [0]ens3:172.31.89.192<0>
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Bootstrap : Using [0]ens3:172.31.93.195<0>
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Bootstrap : Using [0]ens3:172.31.93.195<0>
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Bootstrap : Using [0]ens3:172.31.93.195<0>
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO NET/IB : No device found.
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Bootstrap : Using [0]ens3:172.31.93.195<0>
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO NET/Socket : Using [0]ens3:172.31.89.192<0>
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO NET/Plugin : No plugin found (libnccl-net.so).
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO NET/IB : No device found.
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO NET/IB : No device found.
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO NET/Socket : Using [0]ens3:172.31.89.192<0>
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO NET/Socket : Using [0]ens3:172.31.89.192<0>
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO NET/IB : No device found.
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/IB : No device found.
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO NET/IB : No device found.
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO NET/IB : No device found.
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO NET/Socket : Using [0]ens3:172.31.93.195<0>
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO NET/Socket : Using [0]ens3:172.31.93.195<0>
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Socket : Using [0]ens3:172.31.93.195<0>
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO NET/Socket : Using [0]ens3:172.31.93.195<0>
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Setting affinity for GPU 3 to ffffffff
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Setting affinity for GPU 2 to ffffffff
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Setting affinity for GPU 2 to ffffffff
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Setting affinity for GPU 1 to ffffffff
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Setting affinity for GPU 3 to ffffffff
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Setting affinity for GPU 0 to ffffffff
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO CUDA Dev 3[3], Socket NIC distance :  PHB
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO CUDA Dev 0[0], Socket NIC distance :  PHB
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO CUDA Dev 1[1], Socket NIC distance :  PHB
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO CUDA Dev 2[2], Socket NIC distance :  PHB
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO CUDA Dev 0[0], Socket NIC distance :  PHB
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO CUDA Dev 1[1], Socket NIC distance :  PHB
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO CUDA Dev 3[3], Socket NIC distance :  PHB
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO CUDA Dev 2[2], Socket NIC distance :  PHB
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Channel 00 :    0   1   2   3   4   5   6   7
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Channel 01 :    0   1   2   3   4   5   6   7
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Ring 00 : 5[1] -> 6[2] via P2P/IPC
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Ring 00 : 2[2] -> 3[3] via P2P/IPC
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Ring 00 : 6[2] -> 7[3] via P2P/IPC
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Ring 00 : 1[1] -> 2[2] via P2P/IPC
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 00 : 7 -> 0 [receive] via NET/Socket/0
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 00 : 3 -> 4 [receive] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 00 : 0[0] -> 1[1] via P2P/IPC
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 00 : 4[0] -> 5[1] via P2P/IPC
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Ring 00 : 3 -> 4 [send] via NET/Socket/0
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Ring 00 : 7 -> 0 [send] via NET/Socket/0
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Ring 00 : 5[1] -> 4[0] via P2P/IPC
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Ring 00 : 2[2] -> 1[1] via P2P/IPC
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Ring 00 : 3[3] -> 2[2] via P2P/IPC
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Ring 00 : 1[1] -> 0[0] via P2P/IPC
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Ring 00 : 6[2] -> 5[1] via P2P/IPC
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Ring 00 : 7[3] -> 6[2] via P2P/IPC
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 00 : 4 -> 0 [receive] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 00 : 4 -> 0 [send] via NET/Socket/0
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Ring 01 : 5[1] -> 6[2] via P2P/IPC
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Ring 01 : 6[2] -> 7[3] via P2P/IPC
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Ring 01 : 2[2] -> 3[3] via P2P/IPC
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Ring 01 : 1[1] -> 2[2] via P2P/IPC
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Ring 01 : 7 -> 0 [send] via NET/Socket/0
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Ring 01 : 3 -> 4 [send] via NET/Socket/0
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Ring 01 : 6[2] -> 5[1] via P2P/IPC
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Ring 01 : 2[2] -> 1[1] via P2P/IPC
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 00 : 0 -> 4 [receive] via NET/Socket/0
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 00 : 0 -> 4 [send] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 01 : 7 -> 0 [receive] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 01 : 3 -> 4 [receive] via NET/Socket/0
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 01 : 0[0] -> 1[1] via P2P/IPC
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 01 : 4[0] -> 5[1] via P2P/IPC
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Ring 01 : 1[1] -> 0[0] via P2P/IPC
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Ring 01 : 5[1] -> 4[0] via P2P/IPC
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Ring 01 : 3[3] -> 2[2] via P2P/IPC
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO Trees [0] 1->2->3/-1/-1 [1] 1->2->3/-1/-1
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO Trees [0] 2->3->-1/-1/-1 [1] 2->3->-1/-1/-1
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO Trees [0] 4->5->6/-1/-1 [1] 4->5->6/-1/-1
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 01 : 0 -> 4 [receive] via NET/Socket/0
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Ring 01 : 7[3] -> 6[2] via P2P/IPC
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO Trees [0] 5->6->7/-1/-1 [1] 5->6->7/-1/-1
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO Trees [0] 6->7->-1/-1/-1 [1] 6->7->-1/-1/-1
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO Trees [0] 0->1->2/-1/-1 [1] 0->1->2/-1/-1
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 01 : 0 -> 4 [send] via NET/Socket/0
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Ring 01 : 4 -> 0 [send] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Ring 01 : 4 -> 0 [receive] via NET/Socket/0
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO NET/Socket: Using 2 threads and 8 sockets per thread
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Trees [0] -1->0->1/4/-1 [1] 4->0->1/-1/-1
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Using 128 threads, Min Comp Cap 3, Trees enabled up to size 149999
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO Trees [0] 0->4->5/-1/-1 [1] -1->4->5/0/-1
+[1,2]<stdout>:ip-172-31-89-192:119:257 [2] NCCL INFO comm 0x7fb5b82a81e0 rank 2 nranks 8 cudaDev 2 nvmlDev 2 - Init COMPLETE
+[1,4]<stdout>:ip-172-31-93-195:37:177 [0] NCCL INFO comm 0x7f40d82552f0 rank 4 nranks 8 cudaDev 0 nvmlDev 0 - Init COMPLETE
+[1,6]<stdout>:ip-172-31-93-195:39:179 [2] NCCL INFO comm 0x7f22dc2a1a60 rank 6 nranks 8 cudaDev 2 nvmlDev 2 - Init COMPLETE
+[1,5]<stdout>:ip-172-31-93-195:38:178 [1] NCCL INFO comm 0x7ff4ac24f6d0 rank 5 nranks 8 cudaDev 1 nvmlDev 1 - Init COMPLETE
+[1,7]<stdout>:ip-172-31-93-195:40:180 [3] NCCL INFO comm 0x7f30bc27a5b0 rank 7 nranks 8 cudaDev 3 nvmlDev 3 - Init COMPLETE
+[1,3]<stdout>:ip-172-31-89-192:120:260 [3] NCCL INFO comm 0x7ff3a02433a0 rank 3 nranks 8 cudaDev 3 nvmlDev 3 - Init COMPLETE
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO comm 0x7f547c2d1b30 rank 0 nranks 8 cudaDev 0 nvmlDev 0 - Init COMPLETE
+[1,1]<stdout>:ip-172-31-89-192:118:258 [1] NCCL INFO comm 0x7f744c22e000 rank 1 nranks 8 cudaDev 1 nvmlDev 1 - Init COMPLETE
+[1,0]<stdout>:ip-172-31-89-192:117:259 [0] NCCL INFO Launch mode Parallel
+[1,0]<stderr>:                                                                   [1,0]<st[1,0]<stderr>:n Epoch     #1:   2%|2         | 1/49 [00:06<05:26,  6.80s/it, loss=7.16, accuracy=0]   [1,0]<stderr>:poch     #1:   2%|2         | 1/49 [00:07<05:26,  6.80s/it, loss=6.01, accuracy=5.42][1,0]<stderr>:poch     #1:   4%|4         | 2/49 [00:07<03:50,  4.89s/it, loss=6.01, accuracy=5.42][1,0]<stderr>:poch     #1:   6%|6         | 3/49 [00:07<02:42,  3.53s/it, loss=4.99, accuracy=6.51][1,0]<stderr>:poch     #1:   6%|6         | 3/49 [00:08<02:42,  3.53s/it, loss=4.43, accuracy=7.25][1,0]<stderr>:poch     #1:   8%|8         | 4/49 [00:08<01:57,  2.60s/it, loss=4.43, accuracy=7.25][1,0]<stderr>:poch     #1:   8%|8         | 4/49 [00:08<01:57,  2.60s/it, loss=4.13, accuracy=8.46][1,0]<stderr>:poch     #1:  10%|#         | 5/49 [00:08<01:25,  1.94s/it, loss=4.13, accuracy=8.46][1,0]<stderr>:poch     #1:  10%|#         | 5/49 [00:08<01:25,  1.94s/it, loss=3.94, accuracy=8.89][1,0]<stderr>:poch     #1:  12%|#2        | 6/49 [00:08<01:03,  1.47s/it, loss=3.94, accuracy=8.89][1,0]<stderr>:poch     #1:  12%|#2        | 6/49 [00:09<01:03,  1.47s/it, loss=3.86, accuracy=9.14][1,0]<s170500096it [00:30, 15024909.91it/s]                               [1,0]<stderr>:uracy=9.14][1,0]<stderr>:poch     #1:  14%|#4        | 7/49 [00:09<00:48,  1.15s/it, loss=3.84, accuracy=9.4][1,0]<stderr>:Epoch     #1:  16%|#6        | 8/49 [00:09<00:38,  1.07it/s, loss=3.84, accuracy=9.4] [1,0]<stderr>:poch     #1:  16%|#6        | 8/49 [00:10<00:38,  1.07it/s, loss=3.91, accuracy=9.59][1,0]<stderr>:poch     #1:  18%|#8        | 9/49 [00:10<00:31,  1.28it/s, loss=3.91, accuracy=9.59][1,0]<stderr>:poch     #1:  18%|#8        | 9/49 [00:10<00:31,  1.28it/s, loss=3.97, accuracy=9.67] [1,0]<stderr>:och     #1:  20%|##        | 10/49 [00:10<00:26,  1.49it/s, loss=3.97, accuracy=9.67][1,0]<stderr>:och     #1:  20%|##        | 10/49 [00:10<00:26,  1.49it/s, loss=4.09, accuracy=9.88][1,0]<stderr>:och     #1:  22%|##2       | 11/49 [00:10<00:22,  1.73it/s, loss=4.09, accuracy=9.88][1,0]<stderr>:och     #1:  22%|##2       | 11/49 [00:11<00:22,  1.73it/s, loss=4.31, accuracy=9.86][1,0]<stderr>:och     #1:  24%|##4       | 12/49 [00:11<00:19,  1.91it/s, loss=4.31, accuracy=9.86][1,0]<stderr>:och     #1:  24%|##4       | 12/49 [00:11<00:19,  1.91it/s, loss=4.53, accuracy=9.86][1,0]<stderr>:och     #1:  27%|##6       | 13/49 [00:11<00:16,  2.13it/s, loss=4.53, accuracy=9.86][1,0]<stderr>:och     #1:  29%|##8       | 14/49 [00:11<00:15,  2.26it/s, loss=4.63, accuracy=9.96][1,0]<stderr>:och     #1:  29%|##8       | 14/49 [00:12<00:15,  2.26it/s, loss=4.73, accuracy=9.95][1,0]<stderr>:och     #1:  31%|###       | 15/49 [00:12<00:14,  2.30it/s, loss=4.73, accuracy=9.95][1,0]<stderr>:och     #1:  31%|###       | 15/49 [00:12<00:14,  2.30it/s, loss=4.9, accuracy=9.95][1,0]<stderr>:poch     #1:  33%|###2      | 16/49 [00:12<00:13,  2.45it/s, loss=4.9, accuracy=9.95][1,0]<stderr>:poch     #1:  33%|###2      | 16/49 [00:13<00:13,  2.45it/s, loss=4.96, accuracy=10][1,0]<stderr>:Epoch     #1:  35%|###4      | 17/49 [00:13<00:13,  2.42it/s, loss=4.96, accuracy=10]  [1,0]<stderr>:och     #1:  35%|###4      | 17/49 [00:13<00:13,  2.42it/s, loss=5.05, accuracy=10.2][1,0]<stderr>:och     #1:  37%|###6      | 18/49 [00:13<00:12,  2.42it/s, loss=5.05, accuracy=10.2][1,0]<stderr>:och     #1:  37%|###6      | 18/49 [00:13<00:12,  2.42it/s, loss=5.13, accuracy=10.5][1,0]<stderr>:och     #1:  39%|###8      | 19/49 [00:13<00:12,  2.39it/s, loss=5.13, accuracy=10.5][1,0]<stderr>:och     #1:  39%|###8      | 19/49 [00:14<00:12,  2.39it/s, loss=5.11, accuracy=10.5][1,0]<stderr>:och     #1:  41%|####      | 20/49 [00:14<00:12,  2.38it/s, loss=5.11, accuracy=10.5][1,0]<stderr>:och     #1:  41%|####      | 20/49 [00:14<00:12,  2.38it/s, loss=5.09, accuracy=10.8][1,0]<stderr>:och     #1:  43%|####2     | 21/49 [00:14<00:12,  2.33it/s, loss=5.09, accuracy=10.8][1,0]<stderr>:och     #1:  43%|####2     | 21/49 [00:15<00:12,  2.33it/s, loss=5.07, accuracy=10.8][1,0]<stderr>:och     #1:  45%|####4     | 22/49 [00:15<00:11,  2.36it/s, loss=5.07, accuracy=10.8][1,0]<stderr>:och     #1:  45%|####4     | 22/49 [00:15<00:11,  2.36it/s, loss=5.03, accuracy=11][1,0]<stderr>:Epoch     #1:  47%|####6     | 23/49 [00:15<00:11,  2.36it/s, loss=5.03, accuracy=11]  [1,0]<stderr>:och     #1:  47%|####6     | 23/49 [00:16<00:11,  2.36it/s, loss=4.97, accuracy=11.1][1,0]<stderr>:och     #1:  49%|####8     | 24/49 [00:16<00:10,  2.32it/s, loss=4.97, accuracy=11.1][1,0]<stderr>:och     #1:  49%|####8     | 24/49 [00:16<00:10,  2.32it/s, loss=4.9, accuracy=11.2][1,0]<stderr>:poch     #1:  51%|#####1    | 25/49 [00:16<00:10,  2.32it/s, loss=4.9, accuracy=11.2] [1,0]<stderr>:och     #1:  51%|#####1    | 25/49 [00:17<00:10,  2.32it/s, loss=4.85, accuracy=11.3][1,0]<stderr>:och     #1:  53%|#####3    | 26/49 [00:17<00:09,  2.33it/s, loss=4.85, accuracy=11.3][1,0]<stderr>:och     #1:  53%|#####3    | 26/49 [00:17<00:09,  2.33it/s, loss=4.83, accuracy=11.4]
+Train Ep[1,0]<stderr>:5%|#####5    | 27/49 [00:17<00:09,  2.42it/s, loss=4.83, accuracy=11.4][1,0]<stderr>:och     #1:  55%|#####5    | 27/49 [00:17<00:09,  2.42it/s, loss=4.8, accuracy=11.5][1,0]<stderr>:poch     #1:  57%|#####7    | 28/49 [00:17<00:08,  2.37it/s, loss=4.8, accuracy=11.5] [1,0]<stderr>:och     #1:  57%|#####7    | 28/49 [00:18<00:08,  2.37it/s, loss=4.75, accuracy=11.8][1,0]<stderr>:och     #1:  59%|#####9    | 29/49 [00:18<00:08,  2.33it/s, loss=4.75, accuracy=11.8][1,0]<stderr>:och     #1:  59%|#####9    | 29/49 [00:18<00:08,  2.33it/s, loss=4.68, accuracy=12][1,0]<stderr>:Epoch     #1:  61%|######1   | 30/49 [00:18<00:08,  2.36it/s, loss=4.68, accuracy=12]  [1,0]<stderr>:och     #1:  61%|######1   | 30/49 [00:19<00:08,  2.36it/s, loss=4.62, accuracy=12.2][1,0]<stderr>:och     #1:  63%|######3   | 31/49 [00:19<00:07,  2.48it/s, loss=4.62, accuracy=12.2][1,0]<stderr>:och     #1:  63%|######3   | 31/49 [00:19<00:07,  2.48it/s, loss=4.57, accuracy=12.4][1,0]<stderr>:och     #1:  65%|######5   | 32/49 [00:19<00:06,  2.43it/s, loss=4.57, accuracy=12.4][1,0]<stderr>:och     #1:  65%|######5   | 32/49 [00:19<00:06,  2.43it/s, loss=4.52, accuracy=12.5][1,0]<stderr>:och     #1:  67%|######7   | 33/49 [00:19<00:06,  2.43it/s, loss=4.52, accuracy=12.5][1,0]<stderr>:och     #1:  67%|######7   | 33/49 [00:20<00:06,  2.43it/s, loss=4.46, accuracy=12.6][1,0]<stderr>:och     #1:  69%|######9   | 34/49 [00:20<00:06,  2.39it/s, loss=4.46, accuracy=12.6][1,0]<stderr>:och     #1:  69%|######9   | 34/49 [00:20<00:06,  2.39it/s, loss=4.41, accuracy=12.6][1,0]<stderr>:och     #1:  71%|#######1  | 35/49 [00:20<00:05,  2.36it/s, loss=4.41, accuracy=12.6][1,0]<stderr>:och     #1:  73%|#######3  | 36/49 [00:21<00:05,  2.35it/s, loss=4.36, accuracy=12.8][1,0]<stderr>:och     #1:  73%|#######3  | 36/49 [00:21<00:05,  2.35it/s, loss=4.31, accuracy=13][1,0]<stderr>:Epoch     #1:  76%|#######5  | 37/49 [00:21<00:05,  2.34it/s, loss=4.31, accuracy=13]  [1,0]<stderr>:och     #1:  76%|#######5  | 37/49 [00:22<00:05,  2.34it/s, loss=4.26, accuracy=13.2][1,0]<stderr>:och     #1:  78%|#######7  | 38/49 [00:22<00:04,  2.34it/s, loss=4.26, accuracy=13.2][1,0]<stderr>:och     #1:  78%|#######7  | 38/49 [00:22<00:04,  2.34it/s, loss=4.21, accuracy=13.5][1,0]<stderr>:och     #1:  80%|#######9  | 39/49 [00:22<00:04,  2.33it/s, loss=4.21, accuracy=13.5][1,0]<stderr>:och     #1:  80%|#######9  | 39/49 [00:22<00:04,  2.33it/s, loss=4.17, accuracy=13.7][1,0]<stderr>:och     #1:  82%|########1 | 40/49 [00:22<00:03,  2.33it/s, loss=4.17, accuracy=13.7][1,0]<stderr>:och     #1:  82%|########1 | 40/49 [00:23<00:03,  2.33it/s, loss=4.12, accuracy=13.9][1,0]<stderr>:och     #1:  84%|########3 | 41/49 [00:23<00:03,  2.35it/s, loss=4.12, accuracy=13.9][1,0]<stderr>:och     #1:  84%|########3 | 41/49 [00:23<00:03,  2.35it/s, loss=4.08, accuracy=14][1,0]<stderr>:Epoch     #1:  86%|########5 | 42/49 [00:23<00:02,  2.35it/s, loss=4.08, accuracy=14]  [1,0]<stderr>:och     #1:  86%|########5 | 42/49 [00:24<00:02,  2.35it/s, loss=4.03, accuracy=14.2][1,0]<stderr>:och     #1:  88%|########7 | 43/49 [00:24<00:02,  2.38it/s, loss=4.03, accuracy=14.2][1,0]<stderr>:och     #1:  88%|########7 | 43/49 [00:24<00:02,  2.38it/s, loss=4, accuracy=14.4][1,0]<stderr>: Epoch     #1:  90%|########9 | 44/49 [00:24<00:02,  2.37it/s, loss=4, accuracy=14.4][1,0]<stderr>:och     #1:  90%|########9 | 44/49 [00:25<00:02,  2.37it/s, loss=3.96, accuracy=14.5]
+
+---------- training log end
+********** Experiment finished
+End experiment
+********** killing docker containers
+>>>>>>>>>> localhost <<<<<<<<<<
+cmd stdout:  6f82944c521bed92762bbf764eba56d4ab55c0b34c052422dc3756ea672ca699
+ cmd stderr:
+>>>>>>>>>> DONE localhost <<<<<<<<<<
+>>>>>>>>>> 172.31.93.195 <<<<<<<<<<
+cmd stdout:  6a2a1ee36c94097b2946c47891a13c38deadc1ab386bae7c1de63317a2f02829
+ cmd stderr:
+>>>>>>>>>> DONE 172.31.93.195 <<<<<<<<<<
+********** kill containers done

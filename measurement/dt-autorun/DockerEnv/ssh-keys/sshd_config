@@ -1,0 +1,4 @@
+Port 2022
+HostKey /home/cluster/.ssh/ssh_host_rsa_key
+PidFile /home/cluster/.ssh/sshd.pid
+PasswordAuthentication no

@@ -1,0 +1,18 @@
+{
+    "comments": "unlimited bandwidth",
+    "host_user": "ubuntu",
+    "host_user_dir": "/home/ubuntu",
+    "host_ssh_key": "~/.ssh/id_rsa",
+    "docker_user_dir": "/home/cluster",
+    "docker_user": "cluster",
+    "docker_ssh_port": 2022,
+    "docker_ssh_key": "./DockerEnv/ssh-keys/id_rsa",
+    "script_path": "~/distributed-training/test_scripts/pytorch_vgg16_cifar10.py",
+    "script_args": "--epochs 20",
+    "nodes": ["localhost", "", "", "", "", "", "", ""],
+    "nGPU": 8,
+    "eth": "ens5",
+    "bw_limit": "40Gbit",
+    "default_bw": "100Gbit",
+    "log_folder": "p3dn-vgg16-CIFAR10"
+}

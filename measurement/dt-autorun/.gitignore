@@ -1,0 +1,11 @@
+.vscode/
+data/
+distributed-training
+horovod-modified/
+logs/
+log_archives
+horovod_logs
+data-*/
+__pycache__/
+tmp/
+chaokun_logs/
