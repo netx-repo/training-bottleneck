@@ -3,7 +3,16 @@ The first step is to generate the backward timing logs for second step, simulati
 
 
 ## 1. generate backward logs
-Note: you can also use logs in `bk_time_log`, instead of generating your own.
+Note: 
+1. You can also use logs in `bk_time_log`, instead of generating your own.
+2. only `resnet50`, `resnet101` and `vgg16` are supported now.
+
+```
+python layerwise_bk_done.py <model-name> <repeat-time>
+
+e.g.
+python layerwise_bk_done.py resnet50 10
+```
 
 ## 2. simulation 
 * `simulation/sim_with_compression_resnet50.py` -> for `resnet50`
